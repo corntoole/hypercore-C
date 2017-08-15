@@ -1,0 +1,16 @@
+find_library(CMOCKA_LIB cmocka)
+find_path(CMOCKA_HDRS cmocka.h /usr/local/include)
+find_package(cmocka PATHS /usr/local/lib/pkgconfig)
+include_directories(/usr/local/include)
+message("${CMOCKA_HDRS}")
+if (CMOCKA_FOUND)
+	message("Boo")
+	include_directories(${CMOCKA_INCLUDE_DIRS})
+	target_link_libraries(${CMOCKA_LIB})
+endif(CMOCKA_FOUND)
+add_executable(basic_test /usr/local/include/cmocka.h basic.c)
+
+target_link_libraries(basic_test LINK_PUBLIC hypercore ${CMOCKA_LIB})
+
+enable_testing()
+add_test(basic_test ${CMAKE_BINARY_DIR}/basic_test)

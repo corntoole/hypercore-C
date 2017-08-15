@@ -1,0 +1,3 @@
+add_executable(hello_hypercore hello_hypercore.c)
+
+target_link_libraries(hello_hypercore LINK_PUBLIC hypercore)
